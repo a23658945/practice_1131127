@@ -3,6 +3,7 @@ import 'lib_function/demo1.dart';
 import 'exTextfield.dart';
 import 'BottomNav.dart';
 import 'ListPage.dart';
+import 'ContentPage.dart';
 
 void main() {
   runApp(const MainApp());
@@ -17,11 +18,12 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(
               brightness: Brightness.light,
               seedColor: Color.fromARGB(255, 238, 241, 21))),
-      initialRoute: '/',
+      initialRoute: '/ContentPage',
       routes: {
         '/': (context) => Demo1(),
         '/ExTextfield1': (context) => Scaffold(
@@ -31,6 +33,7 @@ class MainApp extends StatelessWidget {
               bottomNavigationBar: Bottomna()
             ),
         '/ListPage': (context) => ListPage(),
+        '/ContentPage': (context) => Contentpage(),
       },
     );
   }

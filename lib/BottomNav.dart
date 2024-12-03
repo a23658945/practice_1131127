@@ -20,7 +20,7 @@ class Bottomna extends StatelessWidget {
         } else if (_selectedIndex == 2) {
           Navigator.pushNamed(context, '/ListPage');
         } else if (_selectedIndex == 3) {
-          Navigator.pushNamed(context, '/GridView');
+          Navigator.pushNamed(context, '/ContentPage');
         } else if (_selectedIndex == 4) {
           Navigator.pushNamed(context, '/Listview0');
         } else {
@@ -59,10 +59,10 @@ List<BottomNavigationBarItem> items = [
         Icons.living_sharp,
         color: Colors.black,
       ),
-      label: 'GridView'),
+      label: 'ContentPage'),
   BottomNavigationBarItem(
       icon: Icon(
-        Icons.list_alt,
+        Icons.content_copy,
         color: Colors.black,
       ),
       label: 'Listview'),
