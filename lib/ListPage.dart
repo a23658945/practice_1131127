@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'lib_function/taskList.dart';
 import 'lib_function/TodoDate.dart';
+import 'BottomNav.dart';
 
 class ListPage extends StatefulWidget {
   const ListPage({super.key});
@@ -10,9 +11,7 @@ class ListPage extends StatefulWidget {
 }
 
 class _ListPageState extends State<ListPage> {
-  List<TodoDate> task = [
-    TodoDate(content: "1234", checked: true),
-  ];
+  List<TodoDate> task = []; //TodoDate(content: "1234", checked: true),
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,25 +40,36 @@ class _ListPageState extends State<ListPage> {
           : ListView(
               children: task
                   .map((e) => TaskList(
-                        content: e.content,
                         checked: e.checked,
+                        content: e.content,
+                        onCheckedChange: (bool? newValue) {
+                          setState(() {
+                            e.checked = newValue ?? false;
+                          });
+                        },
                       ))
                   .toList(),
             ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           final result = await Navigator.pushNamed(context, '/ContentPage');
-          setState(() {
-            task.add(TodoDate(checked: false, content: result.toString()));
-          });
+          if (result != null && result != '') {
+            setState(() {
+              task.add(TodoDate(checked: false, content: result.toString()));
+            });
+          } else {
+            setState(() {
+              task.add(TodoDate(checked: false, content: "請重新輸入"));
+            });
+          }
 
           for (int i = 0; i < task.length; i++) {
             print(task[i].content);
           }
-          
         },
         child: Icon(Icons.edit_document),
       ),
+      bottomNavigationBar: Bottomna(),
     );
   }
 }

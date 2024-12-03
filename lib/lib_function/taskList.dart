@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
 class TaskList extends StatefulWidget {
-  TaskList({super.key, required this.checked, required this.content});
+  TaskList({super.key, required this.checked, required this.content,required this.onCheckedChange});
   bool checked;
   String content;
+  final Function(bool?) onCheckedChange;
 
   @override
   State<TaskList> createState() => _TaskListState();
@@ -12,13 +13,11 @@ class TaskList extends StatefulWidget {
 class _TaskListState extends State<TaskList> {
   @override
   Widget build(BuildContext content) {
+   
     return ListTile(
         leading: Checkbox(
-          value: widget.checked ,onChanged: (e){
-            setState(() {
-              widget.checked = e??false;
-            });
-          }),
+          value: widget.checked ,onChanged: widget.onCheckedChange
+          ),
         title: Container(
             height: 50,
             width: 300,
@@ -37,11 +36,15 @@ class _TaskListState extends State<TaskList> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text("${widget.content}"),
                 SizedBox(
-                  width: 60,
+                  width: 10,
                 ),
-                IconButton(onPressed: () {}, icon: Icon(Icons.favorite_border)),
+                Text("${widget.content}"),
+                Spacer(),
+                IconButton(onPressed: () {}, icon: Icon(Icons.favorite),color: Colors.red,),
+                SizedBox(
+                  width: 1,
+                ),
                 IconButton(onPressed: () {}, icon: Icon(Icons.edit_note))
               ],
             )));
